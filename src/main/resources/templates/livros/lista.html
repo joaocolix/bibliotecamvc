@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Livros</title>
+</head>
+<body>
+    <h1>Livros</h1>
+
+    <h2>Novo Livro</h2>
+    <form th:action="@{/livros}" method="post">
+        <label>Título:</label>
+        <input type="text" name="titulo" required><br><br>
+
+        <label>Autor:</label>
+        <input type="text" name="autor" required><br><br>
+
+        <label>ISBN:</label>
+        <input type="text" name="isbn" required><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Livros cadastrados</h2>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Ação</th>
+        </tr>
+        <tr th:each="livro, status : ${livros}">
+            <td th:text="${livro.titulo}"></td>
+            <td th:text="${livro.autor}"></td>
+            <td th:text="${livro.isbn}"></td>
+            <td>
+                <form th:action="@{/livros/excluir/{indice}(indice=${status.index})}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <a th:href="@{/}">Voltar</a>
+</body>
+</html>

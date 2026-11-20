@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Autores</title>
+</head>
+<body>
+    <h1>Autores</h1>
+
+    <h2>Novo Autor</h2>
+    <form th:action="@{/autores}" method="post">
+        <label>Nome:</label>
+        <input type="text" name="nome" required><br><br>
+
+        <label>Nacionalidade:</label>
+        <input type="text" name="nacionalidade"><br><br>
+
+        <label>Data de nascimento:</label>
+        <input type="text" name="dataNascimento"><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Autores cadastrados</h2>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Nome</th>
+            <th>Nacionalidade</th>
+            <th>Data de nascimento</th>
+        </tr>
+        <tr th:each="autor : ${autores}">
+            <td th:text="${autor.nome}"></td>
+            <td th:text="${autor.nacionalidade}"></td>
+            <td th:text="${autor.dataNascimento}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a th:href="@{/}">Voltar</a>
+</body>
+</html>

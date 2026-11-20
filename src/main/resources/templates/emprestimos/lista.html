@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Empréstimos</title>
+</head>
+<body>
+    <h1>Empréstimos</h1>
+
+    <h2>Novo Empréstimo</h2>
+    <form th:action="@{/emprestimos}" method="post">
+        <label>Livro:</label>
+        <input type="text" name="livro.titulo" required><br><br>
+
+        <label>Usuário:</label>
+        <input type="text" name="usuario.nome" required><br><br>
+
+        <label>Data do empréstimo:</label>
+        <input type="date" name="dataEmprestimo"><br><br>
+
+        <label>Data da devolução:</label>
+        <input type="date" name="dataDevolucao"><br><br>
+
+        <label>Devolvido:</label>
+        <input type="checkbox" name="devolvido"><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Empréstimos cadastrados</h2>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Livro</th>
+            <th>Usuário</th>
+            <th>Empréstimo</th>
+            <th>Devolução</th>
+            <th>Devolvido</th>
+        </tr>
+        <tr th:each="emprestimo : ${emprestimos}">
+            <td th:text="${emprestimo.livro != null ? emprestimo.livro.titulo : ''}"></td>
+            <td th:text="${emprestimo.usuario != null ? emprestimo.usuario.nome : ''}"></td>
+            <td th:text="${emprestimo.dataEmprestimo}"></td>
+            <td th:text="${emprestimo.dataDevolucao}"></td>
+            <td th:text="${emprestimo.devolvido ? 'Sim' : 'Não'}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a th:href="@{/}">Voltar</a>
+</body>
+</html>
